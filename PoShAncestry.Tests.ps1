@@ -53,7 +53,7 @@ Describe "Select-Ancestor" {
     Context "when first occurrence is requested" {
         TestSetup
 
-        Select-Ancestor src First -ErrorVariable result `
+        Select-Ancestor src -First -ErrorVariable result `
             -ErrorAction SilentlyContinue
 
         $location = TestTeardown
@@ -69,7 +69,7 @@ Describe "Select-Ancestor" {
     Context "when last occurrence is requested" {
         TestSetup
 
-        Select-Ancestor src Last -ErrorVariable result `
+        Select-Ancestor src -ErrorVariable result `
             -ErrorAction SilentlyContinue
 
         $location = TestTeardown
@@ -85,7 +85,7 @@ Describe "Select-Ancestor" {
     Context "when first occurrence of incomplete name requested" {
         TestSetup
 
-        Select-Ancestor pro First -ErrorVariable result `
+        Select-Ancestor pro -First -ErrorVariable result `
             -ErrorAction SilentlyContinue
 
         $location = TestTeardown
@@ -101,7 +101,7 @@ Describe "Select-Ancestor" {
     Context "when last occurrence of incomplete name requested" {
         TestSetup
 
-        Select-Ancestor pro Last -ErrorVariable result `
+        Select-Ancestor pro -ErrorVariable result `
             -ErrorAction SilentlyContinue
 
         $location = TestTeardown

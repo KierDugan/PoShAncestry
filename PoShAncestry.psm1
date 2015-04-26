@@ -11,6 +11,70 @@ function GetAncestors() {
 
 
 ## Commands --------------------------------------------------------------------
+
+<#
+.SYNOPSIS
+
+Searches the current location string for the given ancestor, using this as the
+new location.
+
+
+.DESCRIPTION
+
+Select-Ancestor will break the current location string up into a list of
+ancestor locations and change to the one requested.  If multiple ancestors share
+the same name, the closest to the current location will be chosen.  This
+behaviour can be changed by using `-First`.
+
+Partial matches are *always* attempted, and an ancestor will be selected if it
+starts with the specified string; e.g. the ancestor 'Work' will be selected by
+the string 'wo'.
+
+
+.PARAMETER Ancestor
+
+Ancestor location to search for.  If there are multiple ancestor locations with
+the same name, the last will be selected.
+
+
+.PARAMETER First
+
+Select the first occurrence of Ancestor instead of the last.
+
+
+.PARAMETER PassThru
+
+Return the new directory object after changing into it.
+
+
+.EXAMPLE
+
+Select-Ancestor Parent
+
+Executed in the directory `C:\Folder1\Folder2\Parent\Child` would change the
+current location to `C:\Folder1\Folder2\Parent`.
+
+
+.EXAMPLE
+
+Select-Ancestor fol -First
+
+Executed in the directory `C:\Folder1\Folder2\Parent\Child` would change the
+current location to `C:\Folder1`.
+
+
+.EXAMPLE
+
+Select-Ancestor fol
+
+Executed in the directory `C:\Folder1\Folder2\Parent\Child` would change the
+current location to `C:\Folder1\Folder2`.
+
+
+.LINK
+
+https://github.com/DuFace/PoShAncestry
+#>
 function Select-Ancestor {
     [CmdletBinding()]
     param(
@@ -19,9 +83,8 @@ function Select-Ancestor {
         $Ancestor,
 
         [Parameter(Mandatory=$false)]
-        [ValidateSet("First", "Last")]
-        [String]
-        $Occurrence = 'Last',
+        [Switch]
+        $First = $false,
 
         [Parameter(Mandatory=$false)]
         [Switch]
@@ -40,7 +103,7 @@ function Select-Ancestor {
         }
 
         # Enumerate over the path parts until the first one is matched
-        $ancestorIndex = if ($Occurrence -eq 'First') {
+        $ancestorIndex = if ($First) {
             # Start from the farthest ancestor
             for ($i = 0; $i -lt $parts.Length; $i++) {
                 if ($parts[$i] -like "$Ancestor*") {
