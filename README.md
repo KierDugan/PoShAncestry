@@ -1,7 +1,7 @@
 PoShAncestry
 ============
 
-Quickly go back to a specific directory instead of typing `cd ..\\..\\..`
+Quickly go back to a specific directory instead of typing `cd ..\..\..`
 redundantly.  Based on [zsh-bd](https://github.com/Tarrasch/zsh-bd) and
 [bd](http://vigneshwaranr.github.io/bd/).
 
