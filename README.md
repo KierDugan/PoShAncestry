@@ -26,7 +26,13 @@ ancestor will be selected.
 
 ## Installation
 
-Manual installation:
+If you have [PsGet](http://psget.net/) installed, you can execute:
+
+```PowerShell
+Install-Module PoShAncestry
+```
+
+Otherwise, for a manual installation:
 
 1.  Create a `PoShAncestry` directory in your PowerShell modules folder.  You
     can find this be examining `$env:PSModulePath`.
@@ -37,7 +43,7 @@ Manual installation:
 ## Select-Ancestor
 
 ```
-Select-Ancestor [-Ancestor] <String> [-First] [-PassThru] [<CommonParameters>]
+Select-Ancestor [[-Ancestor] <String>] [-First] [-PassThru] [<CommonParameters>]
 ```
 
 Searches the current location string for the given ancestor, using this as the
@@ -54,11 +60,11 @@ starts with the specified string; e.g. the ancestor 'Work' will be selected by
 the string 'wo'.
 
 ### Parameters
-| Parameter | Type   | Description                                                                                                               |
-| :-------- | :----: | :------------------------------------------------------------------------------------------------------------------------ |
-| Ancestor  | String | Ancestor location to search for.  If there are multiple ancestor locations with the same name, the last will be selected. |
-| First     | Switch | Select the first occurrence of Ancestor instead of the last.                                                              |
-| PassThru  | Switch | Return the new directory object after changing into it.                                                                   |
+| Parameter | Type   | Description                                                                                                                                                                                     |
+| :-------- | :----: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ancestor  | String | Ancestor location to search for.  If there are multiple ancestor locations with the same name, the last will be selected.  If no ancestor is given, then the parent directory will be selected. |
+| First     | Switch | Select the first occurrence of Ancestor instead of the last.                                                                                                                                    |
+| PassThru  | Switch | Return the new directory object after changing into it.                                                                                                                                         |
 
 ### Example 1
 ```
@@ -83,6 +89,14 @@ Select-Ancestor fol
 
 Executed in the directory `C:\Folder1\Folder2\Parent\Child` would change the
 current location to `C:\Folder1\Folder2`.
+
+### Example 4
+```
+Select-Ancestor
+```
+
+Executed in the directory `C:\Folder1\Folder2\Parent\Child` would change the
+current location to `C:\Folder1\Folder2\Parent`.
 
 
 ## Testing
