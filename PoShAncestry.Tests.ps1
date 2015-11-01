@@ -50,6 +50,21 @@ Describe "Select-Ancestor" {
         }
     }
 
+    Context "when no choice is given" {
+        TestSetup
+
+        Select-Ancestor -ErrorVariable result -ErrorAction SilentlyContinue
+
+        $location = TestTeardown
+
+        It "should move to parent directory" {
+            $location | Should Be ".\company\src\projects\products\src"
+        }
+        It "should produce no error" {
+            $result | Should BeNullOrEmpty
+        }
+    }
+
     Context "when first occurrence is requested" {
         TestSetup
 
