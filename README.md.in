@@ -26,7 +26,13 @@ ancestor will be selected.
 
 ## Installation
 
-Manual installation:
+If you have [PsGet](http://psget.net/) installed, you can execute:
+
+```PowerShell
+Install-Module PoShAncestry
+```
+
+Otherwise, for a manual installation:
 
 1.  Create a `PoShAncestry` directory in your PowerShell modules folder.  You
     can find this be examining `$env:PSModulePath`.
