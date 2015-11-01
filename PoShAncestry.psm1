@@ -34,7 +34,8 @@ the string 'wo'.
 .PARAMETER Ancestor
 
 Ancestor location to search for.  If there are multiple ancestor locations with
-the same name, the last will be selected.
+the same name, the last will be selected.  If no ancestor is given, then the
+parent directory will be selected.
 
 
 .PARAMETER First
@@ -71,6 +72,14 @@ Executed in the directory `C:\Folder1\Folder2\Parent\Child` would change the
 current location to `C:\Folder1\Folder2`.
 
 
+.EXAMPLE
+
+Select-Ancestor
+
+Executed in the directory `C:\Folder1\Folder2\Parent\Child` would change the
+current location to `C:\Folder1\Folder2\Parent`.
+
+
 .LINK
 
 https://github.com/DuFace/PoShAncestry
@@ -92,9 +101,9 @@ function Select-Ancestor {
     )
 
     process {
-        if (-not $Ancestor)
-        {
-            return Set-Location -Path ".."
+        # Act as a convenience command for `cd ..`
+        if (-not $Ancestor) {
+            return Set-Location -Path ".." -PassThru:$PassThru
         }
 
         # Split the current path into a list of directories
