@@ -78,7 +78,7 @@ https://github.com/DuFace/PoShAncestry
 function Select-Ancestor {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         [String]
         $Ancestor,
 
@@ -92,6 +92,11 @@ function Select-Ancestor {
     )
 
     process {
+        if (-not $Ancestor)
+        {
+            return Set-Location -Path ".."
+        }
+
         # Split the current path into a list of directories
         $parts = GetAncestors
 
